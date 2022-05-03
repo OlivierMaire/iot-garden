@@ -1,0 +1,8 @@
+﻿<maui:MauiWinUIApplication
+    x:Class="iot_garden.WinUI.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:maui="using:Microsoft.Maui"
+    xmlns:local="using:iot_garden.WinUI">
+
+</maui:MauiWinUIApplication>
