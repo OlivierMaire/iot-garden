@@ -15,7 +15,7 @@
 		<ApplicationTitle>iot-garden</ApplicationTitle>
 
 		<!-- App Identifier -->
-		<ApplicationId>com.companyname.iot_garden</ApplicationId>
+		<ApplicationId>jp.gally.iot_garden</ApplicationId>
 		<ApplicationIdGuid>36C29C08-A6F1-4ACD-971B-F443C4EFE9B7</ApplicationIdGuid>
 
 		<!-- Versions -->
@@ -28,6 +28,10 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
 		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<RepositoryUrl>https://github.com/OlivierMaire/iot-garden</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<PackageLicenseFile>C:\Users\Fuyuki\src\iot-garden\LICENSE</PackageLicenseFile>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -46,6 +50,25 @@
 
 		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
 		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="GardenPage.xaml.cs">
+	    <DependentUpon>GardenPage.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="GardenPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="README.md">
+	    <Pack>True</Pack>
+	    <PackagePath>\</PackagePath>
+	  </None>
 	</ItemGroup>
 
 </Project>
