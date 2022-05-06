@@ -4,11 +4,19 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:iot_garden"
+    
     Shell.FlyoutBehavior="Disabled">
-
-    <ShellContent
+    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
+        <ShellContent
         Title="Hello, Shell!"
+            Icon="leaf.svg"
         ContentTemplate="{DataTemplate local:GardenPage}"
         Route="GardenPage" />
+        <ShellContent
+        Title="Settings"
+            Icon="cogwheel.svg"
+        ContentTemplate="{DataTemplate local:SettingPage}"
+        Route="SettingPage" />
+    </FlyoutItem>
 
 </Shell>
