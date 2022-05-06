@@ -36,10 +36,10 @@
 
 	<ItemGroup>
 		<!-- App Icon -->
-		<MauiIcon Include="Resources\appicon.svg" ForegroundFile="Resources\appiconfg.svg" Color="#512BD4" />
+		<MauiIcon Include="Resources\appiconbg.svg" ForegroundFile="Resources\gardenicon.svg" ForegroundScale="0.65" Color="#E2BC99" />
 
 		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\appiconfg.svg" Color="#512BD4" BaseSize="128,128" />
+		<MauiSplashScreen Include="Resources\splashicon.svg" Color="#E2BC99" BaseSize="128,128" />
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
@@ -53,12 +53,28 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <PackageReference Include="Google.Api.Gax.Grpc.GrpcNetClient" Version="3.7.0" />
+	  <PackageReference Include="Google.Cloud.Firestore" Version="2.5.0" />
+	</ItemGroup>
+<!-- 
+	<ItemGroup>
+	  <None Remove="Resources\appiconbg.svg" />
+	  <None Remove="Resources\gardenicon.svg" />
+	</ItemGroup> -->
+
+	<ItemGroup>
+	  <Compile Update="SettingPage.xaml.cs">
+	    <DependentUpon>SettingPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="GardenPage.xaml.cs">
 	    <DependentUpon>GardenPage.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="SettingPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="GardenPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -69,6 +85,10 @@
 	    <Pack>True</Pack>
 	    <PackagePath>\</PackagePath>
 	  </None>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Services\" />
 	</ItemGroup>
 
 </Project>
