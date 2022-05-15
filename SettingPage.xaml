@@ -3,11 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:iot_garden.ViewModels;assembly=iot-garden"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:syncfusion="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
              x:Class="iot_garden.SettingPage">
 
     <ContentPage.Behaviors>
-        <toolkit:EventToCommandBehavior
+        <!--<toolkit:EventToCommandBehavior
                 EventName="Loaded"
+                Command="{Binding LoadData}" />-->
+        <toolkit:EventToCommandBehavior
+                EventName="NavigatedTo"
                 Command="{Binding LoadData}" />
     </ContentPage.Behaviors>
 
@@ -21,7 +25,32 @@
 
             <VerticalStackLayout>
                 <Label Text="Sensors" />
+                <syncfusion:SfListView ItemsSource="{Binding Sensors}" HeightRequest="150" WidthRequest="320">
+                    <syncfusion:SfListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid ColumnSpacing="10">
+                                    <Grid.ColumnDefinitions >
+                                        <ColumnDefinition />
+                                        <ColumnDefinition />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <Label Text="{Binding Name}" FontAttributes="Bold" HorizontalTextAlignment="Center" />
+                                    <Label Grid.Column="1" Text="{Binding Type}" HorizontalTextAlignment="Center" />
+                                    <Label Grid.Column="2" Text="{Binding Port}" HorizontalTextAlignment="Center" />
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </syncfusion:SfListView.ItemTemplate>
+                </syncfusion:SfListView>
             </VerticalStackLayout>
+
+            <Button 
+                Text="Add Sensor"
+                FontAttributes="Bold"
+                SemanticProperties.Hint="Counts the number of times you click"
+                Clicked="AddSensor"
+                 />
 
             <HorizontalStackLayout HorizontalOptions="CenterAndExpand" Spacing="25">
             <Button 

@@ -54,8 +54,11 @@
 
 	<ItemGroup>
 	  <PackageReference Include="CommunityToolkit.Maui" Version="1.0.0-rc2" />
+	  <PackageReference Include="DependencyInjectionMauiBlazor" Version="1.0.2" />
 	  <PackageReference Include="Google.Api.Gax.Grpc.GrpcNetClient" Version="3.7.0" />
 	  <PackageReference Include="Google.Cloud.Firestore" Version="2.5.0" />
+	  <PackageReference Include="MessagePipe" Version="1.7.3" />
+	  <PackageReference Include="Syncfusion.Maui.ListView" Version="20.1.52-preview" />
 	</ItemGroup>
 <!-- 
 	<ItemGroup>
@@ -64,6 +67,12 @@
 	</ItemGroup> -->
 
 	<ItemGroup>
+	  <Compile Update="Controls\SensorControl.xaml.cs">
+	    <DependentUpon>SensorControl.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="SensorEdit.xaml.cs">
+	    <DependentUpon>SensorEdit.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="SettingPage.xaml.cs">
 	    <DependentUpon>SettingPage.xaml</DependentUpon>
 	  </Compile>
@@ -73,6 +82,15 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Controls\SensorControl.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Controls\SensorsGridControl.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="SensorEdit.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="SettingPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

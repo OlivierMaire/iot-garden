@@ -1,6 +1,9 @@
 ﻿using CommunityToolkit.Maui;
+using DependencyInjectionMauiBlazor;
 using iot_garden.Services;
 using iot_garden.ViewModels;
+using MessagePipe;
+using Syncfusion.Maui.ListView.Hosting;
 
 namespace iot_garden;
 
@@ -17,12 +20,28 @@ public static class MauiProgram
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			})
 			.UseMauiCommunityToolkit();
-		// dependency injection configuration
-		builder.Services.AddSingleton<SettingService>();
-		builder.Services.AddTransient<FirestoreService>();
-		builder.Services.AddTransient<SettingPage>();
-		builder.Services.AddTransient<SettingViewModel>();
+		builder.ConfigureSyncfusionListView();
 
-		return builder.Build();
+		builder.Services.AddMessagePipe();
+
+		// dependency injection configuration
+		//builder.Services.AddSingleton<INavigation, Microsoft.Maui.Controls.NaviNavigation>();
+
+		builder.Services.AddSingleton<SettingService>();
+		builder.Services.AddSingleton<FirestoreService>();
+		// pages
+		builder.Services.AddSingleton<SettingPage>();
+		builder.Services.AddTransient<SensorEdit>();
+		builder.Services.AddSingleton<GardenPage>();
+		// viewmodels
+		builder.Services.AddSingleton<SettingViewModel>();
+		builder.Services.AddSingleton<SensorSettingViewModel>();
+		builder.Services.AddSingleton<GardenViewModel>();
+		
+
+
+		var app = builder.Build();
+		app.Services.UseResolver(); 
+		return app;
 	}
 }

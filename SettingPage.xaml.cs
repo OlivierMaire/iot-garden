@@ -17,14 +17,9 @@ public partial class SettingPage : ContentPage
 		_setting = setting;
 	}
 
-	private async void LoadData(object sender, EventArgs e)
+	private async void AddSensor(object sender, EventArgs e)
 	{
-		await _setting.LoadSettings(true);
-	}
-	private async void SaveData(object sender, EventArgs e)
-	{
-		await _setting.SaveSettings();
-	}
-
+        await Navigation.PushModalAsync(new SensorEdit(_setting, new SensorSettingViewModel()));
+    } 
 }
 

@@ -1,38 +1,32 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:vm="clr-namespace:iot_garden.ViewModels;assembly=iot-garden"
+             xmlns:c="clr-namespace:iot_garden.Controls;assembly=iot-garden"
              x:Class="iot_garden.GardenPage">
+
+    <ContentPage.Behaviors>
+        <!--<toolkit:EventToCommandBehavior
+                EventName="Loaded"
+                Command="{Binding LoadData}" />-->
+        <toolkit:EventToCommandBehavior
+                EventName="NavigatedTo"
+                Command="{Binding OnLoaded}" />
+    </ContentPage.Behaviors>
 
     <ScrollView>
         <VerticalStackLayout Spacing="25" Padding="30">
 
             <Label 
-                Text="iot-garden"
+                Text="{Binding GardenName}"
                 SemanticProperties.HeadingLevel="Level1"
                 FontSize="32"
                 HorizontalOptions="Center" />
 
-            <Label 
-                Text="Welcome to .NET Multi-platform App UI"
-                SemanticProperties.HeadingLevel="Level1"
-                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
-                FontSize="18"
-                HorizontalOptions="Center" />
+            <c:SensorsGridControl Sensors="{Binding Sensors}"></c:SensorsGridControl>
 
-            <Label 
-                Text="Current count: 0"
-                FontSize="18"
-                FontAttributes="Bold"
-                x:Name="CounterLabel"
-                HorizontalOptions="Center" />
-
-            <Button 
-                Text="Click me"
-                FontAttributes="Bold"
-                SemanticProperties.Hint="Counts the number of times you click"
-                Clicked="OnCounterClicked"
-                HorizontalOptions="Center" />
-
+           
             <Image
                 Source="dotnet_bot.png"
                 SemanticProperties.Description="Cute dot net bot waving hi to you!"

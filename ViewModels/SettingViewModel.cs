@@ -14,34 +14,34 @@ namespace iot_garden.ViewModels
 {
     public class SettingViewModel : INotifyPropertyChanged
     {
+        private readonly SettingService _setting;
         public GardenSetting Settings { get; set; }
 
-        private readonly FirestoreService _firestore;
+        //private readonly FirestoreService _firestore;
         //private FirestoreDb _firestoreDb;
-        private Dictionary<string, object> _settingData;
-        public SettingViewModel(FirestoreService firestore)
+        public SettingViewModel(SettingService setting)
         {
-            _firestore = firestore;
+            _setting = setting;
             Settings = new GardenSetting();
 
 
             LoadData = new Command(async () =>
             {
-                await LoadSettings(true);
+                await LoadSettings();
             });
 
 
             SaveData = new Command(async () =>
             {
                 await SaveSettings();
-            });
+            }); 
         }
 
 
 
         public event PropertyChangedEventHandler PropertyChanged;
         public ICommand LoadData { get; private set; }
-        public ICommand SaveData { get; private set; }
+        public ICommand SaveData { get; private set; } 
 
         public string Name
         {
@@ -63,6 +63,26 @@ namespace iot_garden.ViewModels
             }
         }
 
+        public List<SensorSetting> Sensors
+        {
+            get
+            {
+                return Settings.Sensors;
+            }
+            set
+            {
+                if (Settings.Sensors != value)
+                {
+                    Settings.Sensors = value;
+
+                    if (PropertyChanged != null)
+                    {
+                        PropertyChanged(this, new PropertyChangedEventArgs("Sensors"));
+                    }
+                }
+            }
+        }
+
 
         protected virtual void OnPropertyChanged(string propertyName)
         {
@@ -71,28 +91,21 @@ namespace iot_garden.ViewModels
 
         public async Task SaveSettings()
         {
-            //var json = System.Text.Json.JsonSerializer.Serialize(Settings);
 
-            var firestoreDb = await _firestore.GetDb();
+            await _setting.SaveSettings(Settings);
 
-            DocumentReference docRef = firestoreDb.Collection("settings").Document("setting");
-            await docRef.SetAsync(Settings.AsDictionary());
         }
 
-        public async Task LoadSettings(bool overrideSettings = false)
+        public async Task LoadSettings()
         {
-            var firestoreDb = await _firestore.GetDb();
+            Settings = await _setting.LoadSettings(true);
 
-            DocumentReference docRef = firestoreDb.Collection("settings").Document("setting");
-            DocumentSnapshot docSnapshot = await docRef.GetSnapshotAsync();
-
-            _settingData = docSnapshot.ToDictionary();
-            if (overrideSettings)
-            {
-                Settings = docSnapshot.ToDictionary().ToObject<GardenSetting>();
-                PropertyChanged(this, new PropertyChangedEventArgs("Name"));
-            }
+            PropertyChanged(this, new PropertyChangedEventArgs("Name"));
+            PropertyChanged(this, new PropertyChangedEventArgs("Sensors"));
 
         }
+
+         
     }
+
 }

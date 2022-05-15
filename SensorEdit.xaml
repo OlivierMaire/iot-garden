@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:iot_garden.ViewModels;assembly=iot-garden"
+             xmlns:converters="clr-namespace:iot_garden.Converters;assembly=iot-garden"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="iot_garden.SensorEdit" >
+    <!--Loaded="OnLoaded">-->
+
+    <!--<ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior
+                EventName="Loaded"
+                Command="{Binding LoadData}" />
+    </ContentPage.Behaviors>-->
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:IntToEnumConverter x:Key="IntToEnumConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="25" Padding="30">
+            <Label Text="Add a sensor" FontSize="Large"/>
+            <VerticalStackLayout>
+                <Label Text="Sensor's Name" />
+                <Entry Text="{Binding Name}" />
+            </VerticalStackLayout>
+            <VerticalStackLayout>
+                <Label Text="Sensor's Type" />
+                <Picker ItemsSource="{Binding TypeNames}" SelectedIndex="{Binding Type, Converter={StaticResource IntToEnumConverter}}"/>
+                <!--<Label Text="{Binding Type}" />-->
+            </VerticalStackLayout>
+            <VerticalStackLayout>
+                <Label Text="Sensor's Port" />
+                <Picker ItemsSource="{Binding PortNames}" SelectedIndex="{Binding Port,  Converter={StaticResource IntToEnumConverter}}" />
+                <!--<Label Text="{Binding Port}" />-->
+            </VerticalStackLayout>
+
+            <HorizontalStackLayout HorizontalOptions="CenterAndExpand" Spacing="25">
+            <Button 
+                Text="Cancel"
+                FontAttributes="Bold"
+                SemanticProperties.Hint="Counts the number of times you click"
+                Clicked="Close"
+                 />
+            <Button 
+                Text="Save the Sensor"
+                FontAttributes="Bold"
+                SemanticProperties.Hint="Counts the number of times you click"
+                Clicked="SaveData"
+                />
+            </HorizontalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
