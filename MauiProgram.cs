@@ -1,8 +1,8 @@
 ﻿using CommunityToolkit.Maui;
-using DependencyInjectionMauiBlazor;
 using iot_garden.Services;
 using iot_garden.ViewModels;
-using MessagePipe;
+using SkiaSharp.Views.Maui.Controls.Hosting;
+using Syncfusion.Maui.Core.Hosting;
 using Syncfusion.Maui.ListView.Hosting;
 
 namespace iot_garden;
@@ -13,7 +13,9 @@ public static class MauiProgram
 	{
 		var builder = MauiApp.CreateBuilder();
 		builder
+			   .UseSkiaSharp(true)
 			.UseMauiApp<App>()
+			.ConfigureSyncfusionCore()
 			.ConfigureFonts(fonts =>
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -21,8 +23,6 @@ public static class MauiProgram
 			})
 			.UseMauiCommunityToolkit();
 		builder.ConfigureSyncfusionListView();
-
-		builder.Services.AddMessagePipe();
 
 		// dependency injection configuration
 		//builder.Services.AddSingleton<INavigation, Microsoft.Maui.Controls.NaviNavigation>();
@@ -41,7 +41,6 @@ public static class MauiProgram
 
 
 		var app = builder.Build();
-		app.Services.UseResolver(); 
 		return app;
 	}
 }

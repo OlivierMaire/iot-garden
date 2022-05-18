@@ -1,5 +1,4 @@
 using iot_garden.Models;
-using MessagePipe;
 
 namespace iot_garden.Controls;
 
@@ -21,6 +20,7 @@ public partial class SensorsGridControl : Grid
         var control = (SensorsGridControl)bindable;
         if (control != null)
         {
+            control.Clear();
             if (newvalue is List<SensorSetting> sensors)
             {
                 var rowNumber = -1;
@@ -37,7 +37,7 @@ public partial class SensorsGridControl : Grid
 
                     rowNumber++;
                     control.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
-                    control.Add(sensorCtl, rowNumber % 2, (int)(rowNumber / 2));
+                        control.Add(sensorCtl, rowNumber % 2, (int)(rowNumber / 2));
                     //control.Add(valueLabel, 1, rowNumber);
                 }
 
