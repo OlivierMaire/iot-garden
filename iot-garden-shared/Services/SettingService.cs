@@ -1,17 +1,17 @@
 ﻿using Google.Cloud.Firestore;
-using iot_garden.Extensions;
-using iot_garden.Models;
+// using iot_garden.Extensions;
+using iot_garden_shared.Models;
 
-namespace iot_garden.Services
+namespace iot_garden_shared.Services
 {
     public class SettingService
     {
         public GardenSetting Settings { get; set; }
 
-        private readonly FirestoreService _firestore;
+        private readonly IFirestoreService _firestore;
         //private FirestoreDb _firestoreDb;
         //private Dictionary<string, object> _settingData;
-        public SettingService(FirestoreService firestore)
+        public SettingService(IFirestoreService firestore)
         {
             _firestore = firestore;
             //Settings = new GardenSetting();
@@ -84,7 +84,7 @@ namespace iot_garden.Services
             //    }
             //}
 
-            Query query = db.Collection("realtime").WhereEqualTo("SensorId", sensorId).OrderBy("Timestamp").LimitToLast(3);
+            Query query = db.Collection("realtime").WhereEqualTo("SensorId", sensorId).OrderBy("Timestamp").LimitToLast(10);
             Console.WriteLine($"Listening for sensor {sensorId}");
             FirestoreChangeListener listener = query.Listen( async snapshot =>
             {

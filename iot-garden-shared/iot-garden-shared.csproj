@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <RootNamespace>iot_garden_shared</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+
+
+  <ItemGroup>
+	  <PackageReference Include="Google.Api.Gax.Grpc.GrpcNetClient" Version="3.7.0" />
+	  <PackageReference Include="Google.Cloud.Firestore" Version="2.5.0" />
+  </ItemGroup>
+</Project>

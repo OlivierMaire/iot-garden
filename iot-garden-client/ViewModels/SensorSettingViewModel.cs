@@ -1,5 +1,5 @@
 ﻿using iot_garden.Extensions;
-using iot_garden.Models;
+using iot_garden_shared.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

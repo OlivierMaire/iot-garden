@@ -1,7 +1,5 @@
-﻿using Google.Api.Gax.Grpc.GrpcNetClient;
-using Google.Cloud.Firestore;
-using iot_garden.Services;
-using iot_garden.ViewModels;
+﻿using iot_garden.ViewModels;
+using iot_garden_shared.Services;
 
 namespace iot_garden;
 

@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Maui;
 using iot_garden.Services;
 using iot_garden.ViewModels;
+using iot_garden_shared.Services;
 using SkiaSharp.Views.Maui.Controls.Hosting;
 using Syncfusion.Maui.Core.Hosting;
 using Syncfusion.Maui.ListView.Hosting;
@@ -28,7 +29,7 @@ public static class MauiProgram
 		//builder.Services.AddSingleton<INavigation, Microsoft.Maui.Controls.NaviNavigation>();
 
 		builder.Services.AddSingleton<SettingService>();
-		builder.Services.AddSingleton<FirestoreService>();
+		builder.Services.AddSingleton<IFirestoreService, FirestoreService>();
 		// pages
 		builder.Services.AddSingleton<SettingPage>();
 		builder.Services.AddTransient<SensorEdit>();

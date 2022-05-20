@@ -1,4 +1,4 @@
-using iot_garden.Models;
+using iot_garden_shared.Models;
 
 namespace iot_garden.Controls;
 

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace iot_garden.Models
+namespace iot_garden_shared.Models
 {
     [FirestoreData]
     public class SensorData

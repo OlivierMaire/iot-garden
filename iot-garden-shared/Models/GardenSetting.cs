@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace iot_garden.Models
+namespace iot_garden_shared.Models
 {
     [FirestoreData]
     public class GardenSetting
@@ -34,6 +34,8 @@ namespace iot_garden.Models
         [FirestoreProperty]
         public SensorPort Port { get; set; }
 
+        [FirestoreProperty]
+        public bool Displayed { get; set; }
     }
 
     public enum SensorType

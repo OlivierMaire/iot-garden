@@ -1,5 +1,4 @@
-﻿using iot_garden.Models;
-using iot_garden.Services;
+﻿using iot_garden_shared.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -7,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using iot_garden_shared.Services;
 
 namespace iot_garden.ViewModels
 {
@@ -68,6 +68,7 @@ namespace iot_garden.ViewModels
 
         public async Task SaveSensorData(SensorData data)
         {
+            Thread.Sleep(1000);
             if (sensorData == null)
                 sensorData = new Dictionary<string, List<SensorData>>();
             if (!sensorData.ContainsKey(data.SensorId))

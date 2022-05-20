@@ -1,7 +1,5 @@
-﻿using Google.Cloud.Firestore;
-using iot_garden.Extensions;
-using iot_garden.Models;
-using iot_garden.Services;
+﻿using iot_garden_shared.Models;
+using iot_garden_shared.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
