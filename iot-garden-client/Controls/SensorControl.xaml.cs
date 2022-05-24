@@ -8,10 +8,12 @@ using Syncfusion.Maui.Charts;
 using System.Collections.ObjectModel;
 using LiveChartsCore.SkiaSharpView.Painting;
 using SkiaSharp;
+using iot_garden_shared.Extensions;
+using System.Drawing;
 
 namespace iot_garden.Controls;
 
-public partial class SensorControl : ContentView
+public partial class SensorControl : ContentView, IDrawable
 {
 
     public SensorSetting Sensor { get; set; }
@@ -50,7 +52,7 @@ public partial class SensorControl : ContentView
 
     public SensorControl(SensorSetting Sensor)
     {
-
+        
 
 
         this.Sensor = Sensor;
@@ -90,17 +92,20 @@ public partial class SensorControl : ContentView
 
         InitializeComponent();
 
-        var stackLayout = new VerticalStackLayout();
+        var stackLayout = new VerticalStackLayout()
+        {
+            Padding = new Thickness(5, 0)
+        };
 
         var descLabel = new Label { Text = Sensor.Name };
-        var valueLabel = new Label { Text = Sensor.Type.ToString() };
-        var lastDataLabel = new Label { BindingContext = this };
+        //var valueLabel = new Label { Text = Sensor.Type.ToString() };
+        var lastDataLabel = new Label { BindingContext = this, FontSize = 20, FontAttributes = FontAttributes.Bold };
         lastDataLabel.SetBinding(Label.TextProperty, nameof(LastDataValue));
         stackLayout.Add(
             new FlexLayout() { Children = { descLabel, lastDataLabel}, Direction=FlexDirection.Row, Wrap= FlexWrap.NoWrap, JustifyContent=FlexJustify.SpaceBetween, HeightRequest = 30 });
 
-            
-        stackLayout.Add(valueLabel);
+
+        //stackLayout.Add(valueLabel);
 
 
         chart = new CartesianChart()
@@ -111,13 +116,13 @@ public partial class SensorControl : ContentView
         {
             new Axis
             {
-                Labeler = value => new DateTime((long) value).ToString("HH:mm"),
-                LabelsRotation = -30,
+                Labeler = value => null, //new DateTime((long) value).ToString("HH:mm"),
+                                         //    LabelsRotation = -30,
                 Padding = new LiveChartsCore.Drawing.Padding(5),
 
-                UnitWidth = TimeSpan.FromMinutes(1).Ticks, 
+                UnitWidth = TimeSpan.FromMinutes(1).Ticks,
                 MinStep = TimeSpan.FromMinutes(1).Ticks
-}
+            }
         },
             YAxes = new Axis[]
         {
@@ -125,83 +130,16 @@ public partial class SensorControl : ContentView
             {
                 Padding = new LiveChartsCore.Drawing.Padding(5),
                 MinLimit = 0,
+                Labeler = value => value == 0 ? "" : value.ToString(),
+
+                
 
 }
         },
         HeightRequest = 100,
+        Padding = new Thickness(0, 0, 0, 15),
         };
         chart.SetBinding(CartesianChart.SeriesProperty, nameof(SensorSeries));
-
-
-        //// chart
-        //var chart2 = new SfCartesianChart() { 
-        //     HeightRequest = 100
-        //};
-
-        ////chart.Title = new Label
-        ////{
-        ////    Text = "Value"
-        ////};
-        //// Initializing primary axis
-        //DateTimeAxis primaryAxis = new DateTimeAxis()
-        //{
-        //    //RangePadding = DateTimeRangePadding.Additional,
-
-        //};
-        //////primaryAxis.Title = new ChartAxisTitle()
-        //////{
-        //////    Text = "Time"
-        //////};
-        //chart2.XAxes.Add(primaryAxis);
-
-        //////Initializing secondary Axis
-        //NumericalAxis secondaryAxis = new NumericalAxis()
-        //{
-        //    RangePadding = NumericalPadding.RoundEnd
-        //};
-        //////secondaryAxis.Title = new ChartAxisTitle()
-        //////{
-        //////    Text = "Value"
-        //////};
-        //chart2.YAxes.Add(secondaryAxis);
-
-        ////chart2.XAxes.Add(new NumericalAxis());
-        ////chart2.YAxes.Add(new NumericalAxis());
-
-        ////chart.BindingContext = this;
-        //dataBinding = new SensorDataViewModel();
-        //chart2.BindingContext = this;
-        ////Initialize the two series for SfChart
-        //var binding = new Binding() { Path = "Data" };
-        //ColumnSeries series = new ColumnSeries()
-        //{
-        //    //Label = "Height",
-        //    //ShowDataLabels = true,
-
-        //    Width = 1,
-        //    //XBindingPath = "X",
-        //    //YBindingPath = "Y"
-        //    XBindingPath = "Timestamp",
-        //    YBindingPath = "Value",
-        //    //DataLabelSettings = new CartesianDataLabelSettings
-        //    //{
-        //    //    LabelPlacement = DataLabelPlacement.Inner
-        //    //}
-        //};
-        ////series.EnableAnimation = true;
-        //series.SetBinding(ColumnSeries.ItemsSourceProperty, binding);
-        ////chart.AnimateSeries();
-        ////series.SetBinding(LineSeries.ItemsSourceProperty, nameof(_data));
-
-        //chart2.Series.Add(series);
-
-        //stackLayout.Add(chart2);
-
-
-        //Button button = new Button();
-        //button.Text = "Dynamic";
-        //button.Clicked += Button_Clicked;
-
 
         AbsoluteLayout.SetLayoutBounds(stackLayout, new Rect(0,0, 1, 1));
         AbsoluteLayout.SetLayoutFlags(stackLayout, AbsoluteLayoutFlags.SizeProportional);
@@ -209,17 +147,39 @@ public partial class SensorControl : ContentView
         AbsoluteLayout.SetLayoutBounds(chart, new Rect(0, 15, 1, 1));
         AbsoluteLayout.SetLayoutFlags(chart, AbsoluteLayoutFlags.SizeProportional);
 
+        var icon = new Image()
+        {
+            Source = ImageSource.FromFile(Sensor.Type.AsIconName()),
+            WidthRequest = 32,
+            HeightRequest = 32,
+            Style = Resources["SensorIcon"] as Style
+        };
+        
 
-        //AbsoluteLayout.SetLayoutBounds(chart2, new Rect(0, 15, 1, 1));
-        //AbsoluteLayout.SetLayoutFlags(chart2, AbsoluteLayoutFlags.SizeProportional);
+        AbsoluteLayout.SetLayoutBounds(icon, new Rect(10, 0.35, 32, 32));
+        AbsoluteLayout.SetLayoutFlags(icon, AbsoluteLayoutFlags.YProportional);
+
+
+        GraphicsView graphics = new GraphicsView()
+        {
+            //HeightRequest = 100
+        };
+        graphics.Drawable = this;
+
+
+        AbsoluteLayout.SetLayoutBounds(graphics, new Rect(0, 0, 1, 1));
+        AbsoluteLayout.SetLayoutFlags(graphics, AbsoluteLayoutFlags.SizeProportional);
+
+
 
         Content = new AbsoluteLayout
         {
-            Children = { chart , stackLayout }
+            Children = { chart, graphics, icon , stackLayout }
             , HeightRequest = 100
         };
 
-
+        //graphics.Invalidate();
+        
 
 
         MessagingCenter.Subscribe<GardenViewModel, SensorData>(this, Sensor.Id, async (sender, data) =>
@@ -266,7 +226,28 @@ public partial class SensorControl : ContentView
         });
 
     }
+    public void Draw(ICanvas canvas, RectF dirtyRect)
+    {
+        Microsoft.Maui.Graphics.RadialGradientPaint radialGradientPaint = new Microsoft.Maui.Graphics.RadialGradientPaint
+        {
+            //StartColor = Colors.Red,
+            //EndColor = Colors.DarkBlue,
 
+            StartColor = Colors.Yellow,
+            EndColor = Colors.Green,
+            Center = new Microsoft.Maui.Graphics.Point(1.0, 1.0)
+           
+            // Radius is already 0.5
+        };
+
+        RectF radialRectangle = dirtyRect;
+        canvas.Alpha = 0.35F;
+        canvas.StrokeSize = 2;
+        canvas.SetFillPaint(radialGradientPaint, radialRectangle);
+        canvas.SetShadow(new Microsoft.Maui.Graphics.SizeF(10, 10), 10, Colors.Grey);
+        canvas.FillRoundedRectangle(radialRectangle, 6);
+
+    }
 
     //private void Button_Clicked(object sender, EventArgs e)
     //{

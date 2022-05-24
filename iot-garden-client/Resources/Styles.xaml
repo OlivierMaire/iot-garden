@@ -31,6 +31,16 @@
     <Color x:Key="Blue200Accent">#72ACF1</Color>
     <Color x:Key="Blue300Accent">#A7CBF6</Color>
 
+    <LinearGradientBrush x:Key="DarkSkyGradient" EndPoint="0,1">
+        <GradientStop Color="#061728" Offset="0.1" />
+        <GradientStop Color="#0e4882" Offset="1.0" />
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="SkyGradient" EndPoint="0,1">
+        <GradientStop Color="#009FFF" Offset="0.1" />
+        <GradientStop Color="#b1d0ee" Offset="1.0" />
+    </LinearGradientBrush>
+
     <Style TargetType="ActivityIndicator">
         <Setter Property="Color" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}" />
     </Style>
@@ -452,6 +462,13 @@
         <Setter Property="BarTextColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}" />
         <Setter Property="UnselectedTabColor" Value="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource DarkGray}}" />
         <Setter Property="SelectedTabColor" Value="{AppThemeBinding Light={StaticResource DarkGray}, Dark={StaticResource LightGray}}" />
+    </Style>
+
+    <Style x:Key="SensorIcon" TargetType="Image">
+    </Style>
+
+    <Style TargetType="ContentPage">
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource Dark}, Light={StaticResource Dark}}" />
     </Style>
 
 </ResourceDictionary>

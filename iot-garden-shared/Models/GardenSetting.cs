@@ -40,10 +40,12 @@ namespace iot_garden_shared.Models
 
     public enum SensorType
     {
-        TemperatureAndHumidity = 0,
-        Relay = 1,
+        Temperature = 0,
+        Humidity = 1,
         Moisture = 2,
-        Light =3
+        Light =3,
+        Relay = 9,
+
     }
 
     public enum SensorPort

@@ -4,5 +4,8 @@
              xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.Maui;assembly=LiveChartsCore.SkiaSharpView.Maui"
               xmlns:local="clr-namespace:iot_garden.Controls;assembly=iot-garden"
              x:Class="iot_garden.Controls.SensorControl">
+    <ContentView.Resources>
+        <ResourceDictionary Source="../Resources/Styles.xaml" />
+    </ContentView.Resources>
 
 </ContentView>

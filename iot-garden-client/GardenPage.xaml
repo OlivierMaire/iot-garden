@@ -5,7 +5,18 @@
              xmlns:vm="clr-namespace:iot_garden.ViewModels;assembly=iot-garden"
              xmlns:c="clr-namespace:iot_garden.Controls;assembly=iot-garden"
              x:Class="iot_garden.GardenPage">
+    <ContentPage.Style>
 
+        <!--<LinearGradientBrush x:Key="SkyGradient" EndPoint="0,1">
+            <GradientStop Color="#009FFF" Offset="0.1" />
+            <GradientStop Color="#ec2F4B" Offset="1.0" />
+        </LinearGradientBrush>-->
+
+        <Style TargetType="ContentPage">
+            <Setter Property="Background" Value="{AppThemeBinding Dark={StaticResource Dark}, Light={StaticResource SkyGradient}}" />
+        </Style>
+    </ContentPage.Style>
+    <!--<ContentPage.Background-->
     <ContentPage.Behaviors>
         <!--<toolkit:EventToCommandBehavior
                 EventName="Loaded"
@@ -15,25 +26,42 @@
                 Command="{Binding OnLoaded}" />
     </ContentPage.Behaviors>
 
-    <ScrollView>
-        <VerticalStackLayout Spacing="25" Padding="30">
+    <Grid Padding="0">
+        <AbsoluteLayout>
+            <FlexLayout 
+                        Direction="Row"
+                        Wrap="NoWrap"
+                        HeightRequest="150"
+                AbsoluteLayout.LayoutBounds="0,1,1,.23"
+                 AbsoluteLayout.LayoutFlags="All" >
+                <Image Aspect="Center" Source="grass_left.png"  FlexLayout.AlignSelf="End" />
+                <Image Aspect="Fill" Source="grass_gap.png" FlexLayout.Grow="1" FlexLayout.AlignSelf="End" />
+                <Image Aspect="Center" Source="grass_center.png" FlexLayout.AlignSelf="End" />
+                <Image Aspect="Fill" Source="grass_gap.png" FlexLayout.Grow="1"  FlexLayout.AlignSelf="End" />
+                <Image Aspect="Center"  Source="grass_right.png" FlexLayout.AlignSelf="End" />
+        </FlexLayout>
+        </AbsoluteLayout>
+        <ScrollView>
+            <VerticalStackLayout Spacing="25" Padding="30">
 
-            <Label 
+                <Label 
                 Text="{Binding GardenName}"
                 SemanticProperties.HeadingLevel="Level1"
                 FontSize="32"
                 HorizontalOptions="Center" />
 
-            <c:SensorsGridControl Sensors="{Binding Sensors}"></c:SensorsGridControl>
+                <c:SensorsGridControl Sensors="{Binding Sensors}"></c:SensorsGridControl>
 
-           
-            <Image
+
+                <!--<Image
                 Source="dotnet_bot.png"
                 SemanticProperties.Description="Cute dot net bot waving hi to you!"
                 WidthRequest="250"
                 HeightRequest="310"
-                HorizontalOptions="Center" />
+                HorizontalOptions="Center" />-->
 
-        </VerticalStackLayout>
-    </ScrollView>
+            </VerticalStackLayout>
+
+        </ScrollView>
+    </Grid>
 </ContentPage>

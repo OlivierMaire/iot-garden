@@ -42,8 +42,16 @@
 		<MauiSplashScreen Include="Resources\splashicon.svg" Color="#E2BC99" BaseSize="128,128" />
 
 		<!-- Images -->
-		<MauiImage Include="Resources\Images\*" />
+		<MauiImage Include="Resources\Images\**" />
 		<MauiImage Update="Resources\Images\dotnet_bot.svg" BaseSize="168,208" />
+		<MauiImage Update="Resources\Images\icons_*.svg" TintColor="#dddddd" />
+		<MauiImage Update="Resources\Images\grass\grass_left.png" BaseSize="66,150" />
+		<MauiImage Update="Resources\Images\grass\grass_center.png" BaseSize="72,150" />
+		<MauiImage Update="Resources\Images\grass\grass_right.png" BaseSize="66,150" />
+		<MauiImage Update="Resources\Images\grass\grass_gap.png" BaseSize="1,150" />
+		<MauiImage Update="Resources\Images\grass\grass_gap5.png" BaseSize="5,150" />
+		<MauiImage Update="Resources\Images\grass\grass_gap33.png" BaseSize="33,150" />
+		
 
 		<!-- Custom Fonts -->
 		<MauiFont Include="Resources\Fonts\*" />
