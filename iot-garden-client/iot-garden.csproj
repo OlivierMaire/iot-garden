@@ -51,6 +51,7 @@
 		<MauiImage Update="Resources\Images\grass\grass_gap.png" BaseSize="1,150" />
 		<MauiImage Update="Resources\Images\grass\grass_gap5.png" BaseSize="5,150" />
 		<MauiImage Update="Resources\Images\grass\grass_gap33.png" BaseSize="33,150" />
+		<MauiImage Update="Resources\Images\*.webp" Resize="false" />
 		
 
 		<!-- Custom Fonts -->

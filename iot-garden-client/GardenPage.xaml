@@ -13,7 +13,7 @@
         </LinearGradientBrush>-->
 
         <Style TargetType="ContentPage">
-            <Setter Property="Background" Value="{AppThemeBinding Dark={StaticResource Dark}, Light={StaticResource SkyGradient}}" />
+            <Setter Property="Background" Value="{AppThemeBinding Dark={StaticResource DarkSkyGradient}, Light={StaticResource SkyGradient}}" />
         </Style>
     </ContentPage.Style>
     <!--<ContentPage.Background-->
@@ -40,6 +40,16 @@
                 <Image Aspect="Fill" Source="grass_gap.png" FlexLayout.Grow="1"  FlexLayout.AlignSelf="End" />
                 <Image Aspect="Center"  Source="grass_right.png" FlexLayout.AlignSelf="End" />
         </FlexLayout>
+
+            <Image Source="sprinkler_loop2.webp" IsAnimationPlaying="True"
+                AbsoluteLayout.LayoutBounds=".05,1.17,0.5,.5"
+                 AbsoluteLayout.LayoutFlags="All" >
+            </Image>
+
+            <Image Source="sprinkler_loop2.webp" IsAnimationPlaying="True"
+                AbsoluteLayout.LayoutBounds="0.95,1.17,0.5,.5"
+                 AbsoluteLayout.LayoutFlags="All" >
+            </Image>
         </AbsoluteLayout>
         <ScrollView>
             <VerticalStackLayout Spacing="25" Padding="30">
