@@ -165,10 +165,11 @@ public partial class SensorControl : ContentView, IDrawable
             //HeightRequest = 100
         };
         graphics.Drawable = this;
-
-
         AbsoluteLayout.SetLayoutBounds(graphics, new Rect(0, 0, 1, 1));
-        AbsoluteLayout.SetLayoutFlags(graphics, AbsoluteLayoutFlags.SizeProportional);
+        AbsoluteLayout.SetLayoutFlags(graphics, AbsoluteLayoutFlags.SizeProportional); 
+
+
+
 
 
 

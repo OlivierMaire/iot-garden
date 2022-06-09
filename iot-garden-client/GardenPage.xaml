@@ -41,7 +41,7 @@
                 <Image Aspect="Center"  Source="grass_right.png" FlexLayout.AlignSelf="End" />
         </FlexLayout>
 
-            <Image Source="sprinkler_loop2.webp" IsAnimationPlaying="True"
+            <!--<Image Source="sprinkler_loop2.webp" IsAnimationPlaying="True"
                 AbsoluteLayout.LayoutBounds=".05,1.17,0.5,.5"
                  AbsoluteLayout.LayoutFlags="All" >
             </Image>
@@ -49,7 +49,15 @@
             <Image Source="sprinkler_loop2.webp" IsAnimationPlaying="True"
                 AbsoluteLayout.LayoutBounds="0.95,1.17,0.5,.5"
                  AbsoluteLayout.LayoutFlags="All" >
-            </Image>
+            </Image>-->
+
+            <c:SpriklerControl
+                
+                HeightRequest ="100"
+                                     AbsoluteLayout.LayoutBounds="0.95,1.17,0.5,.5"
+                 AbsoluteLayout.LayoutFlags="All">
+                
+            </c:SpriklerControl>
         </AbsoluteLayout>
         <ScrollView>
             <VerticalStackLayout Spacing="25" Padding="30">
